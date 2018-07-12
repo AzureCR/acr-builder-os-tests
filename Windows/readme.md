@@ -12,6 +12,8 @@ Choosing a version of Windows is a balance between what version the production e
 
 For more information, please see https://aka.ms/containercompat
 
+## Windows Server Image Versions
+
 To get a sense of the image sizes, below are representative images required for Windows Server and Nano Server. .NET Framework and .NET Core are used as representative uses of Windows.
 
 ### Windows Server Core, .NET Framework, ASP.NET
@@ -102,7 +104,6 @@ az acr build-task create \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
     --os windows \
     --git-access-token $PAT
-
 ```
 
 ### ltsc2016
