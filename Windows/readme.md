@@ -166,7 +166,6 @@ az acr build-task create \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
     --os windows \
     --git-access-token $PAT
-
 ```
 
 ### 1803
@@ -291,7 +290,6 @@ az acr build-task create \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
     --os windows \
     --git-access-token $PAT
-
 ```
 
 
