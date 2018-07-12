@@ -1,17 +1,18 @@
-# Windows Builds 
+# ACR Build for Windows
+Note! This is preview documentation. Official docs will soon be completed and pushed to https://aka.ms/acr/docs
 
 [ACR Build](https://aka.ms/acr/build) now supports Windows Containers. More interestingly, ACR Build supports all 2016 versions, including 1709, 1803 and ltsc2016 (Long Term Servicing Channel) for Windows Server Core and Nano Server
 
 ## Building Windows Containers with ACR Build
-Use a version specific tag so you're assured you're building the image based on the version of windows you intend to deploy.
-This is critical. If you're deployment environemnt only supports ltsc2016, building on 1709 or 1803 will fail when you attempt to run your built image. Windows container hosts must be the same version, or newer to run previous versions of Windows containers. 
+As a best practice, we recommend using  a version specific tag so you're assured you're building the image based on the version of Windows you intend to deploy.
+This is fairly critical. If the deployment environment only supports ltsc2016, building an image on 1709 or 1803 will fail when a newer versioned image is run on an older version of the host. Windows container hosts must be the same version, or newer to run previous versions of Windows containers. 
 
-## Chosing a version of Windows
-Chosing a version of Windows is a balance between what version your production environemnt can currently support, and newer/smaller images. Windows has done a great job reducing the duplication of files in the base image, reducing the total image size. .NET has also done additional optimizations, further reducing the image sizes. Reducing the image size will reduce the build and deploy times as images are continually pulled across the network as newer base and higher level images are updated.
+## Choosing a version of Windows
+Choosing a version of Windows is a balance between what version the production environment can currently support, and newer/smaller images. Windows has done a great job reducing the duplication of files in the base image, reducing the total image size. .NET has also done additional optimizations, further reducing the image sizes. Reducing the image size will reduce the build and deploy times as images are continually pulled across the network as newer base and higher-level images are updated.
 
 For more information, please see https://aka.ms/containercompat
 
-To get a sense of the image sizes, below are representative images required for Windows Server and Nano Server. .NET Framework and .NET Core are used as representative uses of the versions of Windows.
+To get a sense of the image sizes, below are representative images required for Windows Server and Nano Server. .NET Framework and .NET Core are used as representative uses of Windows.
 
 ### Windows Server Core, .NET Framework, ASP.NET
 ``` Bash
@@ -56,7 +57,18 @@ f192a627961b        helloworld-nanoserver          sac2016                      
 89d27d5bd26c        helloworld-nanoserver          1803                                   527MB
 ```
 
-### Defaulting the registry name:
+# Building Windows images with ACR Build
+The following commands are provided to test and iterate with various approaches. These include `az acr build` for *quick builds*, meaning you can request a build that isn't based on a git commit. You can build from a local directory, or point **acr build** to an existing git repo. This is the equivalent of using `docker build`, except docker isn't required on the machine you're issuing `acr build` from.
+
+`acr build-task` represents a build definition that's awaiting changes. By default, **acr build** will trigger on git-commits and runtime base image updates. For more information, see https://aka.ms/acr/build
+
+## Acquiring Windows Support for the AZ CLI
+To use ACR Build for Windows, as of 7/12/18, use the docker instructions for running the CLI at: https://docs.microsoft.com/en-us/cli/azure/run-azure-cli-docker?view=azure-cli-latest
+
+However, use: `docker pull azurecr/azure-cli` as the Windows support hasn't yet been merged with the public **az cli**
+
+
+## Defaulting the registry name:
 To simplify your `acr build` commands, you can set a default registry name.
 The following `acr build` commands assume you've set the following:
 
