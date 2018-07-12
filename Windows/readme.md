@@ -131,7 +131,7 @@ az acr build \
     -t helloworld-windowsservercore:1709-{{.Build.ID}} \
     -f helloworld-windowsservercore/1709.Dockerfile \
     --os windows \
-    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
+    https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 
 # acr build-task, triggered by git-commits and base image updates, such as windows server core
 az acr build-task create \
