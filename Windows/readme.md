@@ -80,6 +80,18 @@ az configure --defaults acr=[registryname]
 example:
 az configure --defaults acr=jengademos
 
+## Getting a personal access token
+
+The default for build-task requires a git-access-token. This will configure a webhook on the repository to trigger your build-task when commits are made. 
+
+To use ACR Build with a repository you don't own, such as https://github.com/AzureCR/acr-builder-os-tests, you can pass the additional flag `--commit-trigger-enabled=false` which removes the dependency on a personal access token. As a result, the build-task will not automatically triggger on commits, but you can manually start the build task: `az acr build-task run -n HelloworldWinServercoreLtsc2016`
+
+See: [create-a-build-task](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-tutorial-build-task#create-a-build-task) in docs for configuring a personal access token. 
+
+```bash
+PAT=[token]
+```
+
 ## Windows Server Core
 ### multi-arch (version)
 ``` bash
