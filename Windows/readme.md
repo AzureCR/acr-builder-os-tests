@@ -67,6 +67,25 @@ example:
 az configure --defaults acr=jengademos
 
 ## Windows Server Core
+### multi-arch (version)
+``` bash
+# local docker build
+docker build -t helloworld-windowsservercore:multi-arch -f aspnetmvcapp/multi-arch.Dockerfile .
+
+# az acr build
+az acr build -t helloworld-windowsservercore:multi-arch-{{.Build.ID}} -f aspnetmvcapp/multi-arch.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
+
+# az acr build
+az acr build-task create \
+    -n helloworldwinservercoremultiarch \
+    -t helloworld-windowsservercore:multi-arch-{{.Build.ID}} \
+    -f helloworld-windowsservercore/multi-arch.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
+
+```
+
 ### ltsc2016
 ``` bash
 # local docker build
