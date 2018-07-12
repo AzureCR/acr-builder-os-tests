@@ -96,7 +96,7 @@ az acr build \
 
 # acr build-task, triggered by git-commits and base image updates, such as windows server core
 az acr build-task create \
-    -n helloworldwinservercoremultiarch \
+    -n HelloworldWinServercoreMultiarch \
     -t helloworld-windowsservercore:multi-arch-{{.Build.ID}} \
     -f helloworld-windowsservercore/multi-arch.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
@@ -122,7 +122,7 @@ az acr build \
 
 # acr build-task, triggered by git-commits and base image updates, such as windows server core
 az acr build-task create \
-    -n helloworldwinservercoreltsc2016 \
+    -n HelloworldWinServercoreLtsc2016 \
     -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} \
     -f helloworld-windowsservercore/ltsc2016.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
@@ -147,7 +147,7 @@ az acr build \
 
 # acr build-task, triggered by git-commits and base image updates, such as windows server core
 az acr build-task create \
-    -n helloworldwinservercore1709 \
+    -n HelloworldWinServercore1709 \
     -t helloworld-windowsservercore:1709-{{.Build.ID}} \
     -f helloworld-windowsservercore/1709.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
@@ -173,7 +173,7 @@ az acr build \
 
 # acr build-task, triggered by git-commits and base image updates, such as windows server core
 az acr build-task create \
-    -n helloworldwinservercore1803 \
+    -n HelloworldWinServercore1803 \
     -t helloworld-windowsservercore:1803-{{.Build.ID}} \
     -f helloworld-windowsservercore/1803.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
@@ -183,6 +183,30 @@ az acr build-task create \
 
 
 ## Windows Server Nano
+
+### Nanoserver Multi-Arch
+``` bash
+# local docker build
+docker build \
+    -t helloworld-nanoserver:multi-arch \
+    -f helloworld-nanoserver/multi-arch.Dockerfile \
+    .
+
+# az acr build
+az acr build \
+    -t helloworld-nanoserver:multi-arch-{{.Build.ID}} \
+    -f helloworld-nanoserver/multi-arch.Dockerfile  \
+    --os windows \
+    https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
+
+az acr build-task create \
+    -n HelloworldNanoServerMultiarch \
+    -t helloworld-nanoserver:multi-arch-{{.Build.ID}} \
+    -f helloworld-nanoserver/multi-arch.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
+```
 
 ### sac2016
 ``` bash
@@ -200,7 +224,7 @@ az acr build \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
 
 az acr build-task create \
-    -n helloworldnanoserversac2016 \
+    -n HelloworldNanoServerSac2016 \
     -t helloworld-nanoserver:sac2016-{{.Build.ID}} \
     -f helloworld-nanoserver/sac2016.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
@@ -224,7 +248,7 @@ az acr build \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
 
 az acr build-task create \
-    -n helloworldnanoserver1709 \
+    -n HelloworldNanoServer1709 \
     -t helloworld-nanoserver:1709-{{.Build.ID}} \
     -f helloworld-nanoserver/1709.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
@@ -248,7 +272,7 @@ az acr build \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
 
 az acr build-task create \
-    -n helloworldnanoserver1803 \
+    -n HelloworldNanoServer1803 \
     -t helloworld-nanoserver:1803-{{.Build.ID}} \
     -f helloworld-nanoserver/1803.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
