@@ -73,7 +73,7 @@ az configure --defaults acr=jengademos
 docker build -t helloworld-windowsservercore:ltsc2016 -f aspnetmvcapp/ltsc2016.Dockerfile .
 
 # az acr build
-az acr build -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} -f aspnetmvcapp/ltsc2016.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/servercore 
+az acr build -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} -f aspnetmvcapp/ltsc2016.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 ```
 
 ### 1709
@@ -82,7 +82,7 @@ az acr build -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} -f aspnetmvc
 docker build -t helloworld-windowsservercore:1709 -f aspnetmvcapp/1709.Dockerfile .
 
 # az acr build
-az acr build -t helloworld-windowsservercore:1709-{{.Build.ID}} -f aspnetmvcapp/1709.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/servercore 
+az acr build -t helloworld-windowsservercore:1709-{{.Build.ID}} -f aspnetmvcapp/1709.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 ```
 
 ### 1803
@@ -91,7 +91,7 @@ az acr build -t helloworld-windowsservercore:1709-{{.Build.ID}} -f aspnetmvcapp/
 docker build -t helloworld-windowsservercore:1803 -f aspnetmvcapp/1803.Dockerfile .
 
 # az acr build
-az acr build -t helloworld-windowsservercore:1803-{{.Build.ID}} -f aspnetmvcapp/1803.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/servercore 
+az acr build -t helloworld-windowsservercore:1803-{{.Build.ID}} -f aspnetmvcapp/1803.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 ```
 
 ## Windows Server Nano
@@ -102,7 +102,15 @@ az acr build -t helloworld-windowsservercore:1803-{{.Build.ID}} -f aspnetmvcapp/
 docker build -t helloworld-nanoserver:sac2016 -f helloworld-nanoserver/sac2016.Dockerfile .
 
 # az acr build
-az acr build -t helloworld-nanoserver:sac2016-{{.Build.ID}} -f helloworld-nanoserver/sac2016.Dockerfile  --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/nanoserver 
+az acr build -t helloworld-nanoserver:sac2016-{{.Build.ID}} -f helloworld-nanoserver/sac2016.Dockerfile  --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
+
+az acr build-task create \
+    -n helloworldnanoserversac2016 \
+    -t helloworld-nanoserver:sac2016-{{.Build.ID}} \
+    -f helloworld-nanoserver/sac2016.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
 ```
 
 ### 1709
@@ -111,7 +119,15 @@ az acr build -t helloworld-nanoserver:sac2016-{{.Build.ID}} -f helloworld-nanose
 docker build -t helloworld-nanoserver:1709 -f helloworld-nanoserver/1709.Dockerfile .
 
 # az acr build
-az acr build -t helloworld-nanoserver:1709-{{.Build.ID}} -f helloworld-nanoserver/1709.Dockerfile  --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/nanoserver 
+az acr build -t helloworld-nanoserver:1709-{{.Build.ID}} -f helloworld-nanoserver/1709.Dockerfile  --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
+
+az acr build-task create \
+    -n helloworldnanoserver1709 \
+    -t helloworld-nanoserver:1709-{{.Build.ID}} \
+    -f helloworld-nanoserver/1709.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
 ```
 
 ### 1803
@@ -120,7 +136,16 @@ az acr build -t helloworld-nanoserver:1709-{{.Build.ID}} -f helloworld-nanoserve
 docker build -t helloworld-nanoserver:1803 -f helloworld-nanoserver/1803.Dockerfile .
 
 # az acr build
-az acr build -t helloworld-nanoserver:1803-{{.Build.ID}} -f helloworld-nanoserver/1803.Dockerfile  --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/nanoserver 
+az acr build -t helloworld-nanoserver:1803-{{.Build.ID}} -f helloworld-nanoserver/1803.Dockerfile  --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
+
+az acr build-task create \
+    -n helloworldnanoserver1803 \
+    -t helloworld-nanoserver:1803-{{.Build.ID}} \
+    -f helloworld-nanoserver/1803.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
+
 ```
 
 
