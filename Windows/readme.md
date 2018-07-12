@@ -74,6 +74,16 @@ docker build -t helloworld-windowsservercore:ltsc2016 -f aspnetmvcapp/ltsc2016.D
 
 # az acr build
 az acr build -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} -f aspnetmvcapp/ltsc2016.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
+
+# az acr build
+az acr build-task create \
+    -n helloworldwinservercoreltsc2016 \
+    -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} \
+    -f helloworld-windowsservercore/ltsc2016.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
+
 ```
 
 ### 1709
@@ -83,6 +93,16 @@ docker build -t helloworld-windowsservercore:1709 -f aspnetmvcapp/1709.Dockerfil
 
 # az acr build
 az acr build -t helloworld-windowsservercore:1709-{{.Build.ID}} -f aspnetmvcapp/1709.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
+
+# az acr build
+az acr build-task create \
+    -n helloworldwinservercore1709 \
+    -t helloworld-windowsservercore:1709-{{.Build.ID}} \
+    -f helloworld-windowsservercore/1709.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
+
 ```
 
 ### 1803
@@ -92,7 +112,17 @@ docker build -t helloworld-windowsservercore:1803 -f aspnetmvcapp/1803.Dockerfil
 
 # az acr build
 az acr build -t helloworld-windowsservercore:1803-{{.Build.ID}} -f aspnetmvcapp/1803.Dockerfile --os windows https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
+
+# acr build-task, triggered by git-commits and base image updates, such as windows server core
+az acr build-task create \
+    -n helloworldwinservercore1803 \
+    -t helloworld-windowsservercore:1803-{{.Build.ID}} \
+    -f helloworld-windowsservercore/1803.Dockerfile \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
+    --os windows \
+    --git-access-token $PAT
 ```
+
 
 ## Windows Server Nano
 
