@@ -1,7 +1,7 @@
 # ACR Build for Windows
 Note! This is preview documentation. Official docs will soon be completed and pushed to https://aka.ms/acr/docs
 
-[ACR Build](https://aka.ms/acr/build) now supports Windows Containers. More interestingly, ACR Build supports all 2016 versions, including 1709, 1803 and ltsc2016 (Long Term Servicing Channel) for Windows Server Core and Nano Server
+[ACR Build](https://aka.ms/acr/build) now supports Windows Containers. More interestingly, ACR Build supports all released Windows Server versions: Windows Server 2016, Windows Server version 1709, Windows Server version 1803. And it supports both Windows Server Core containers and Nano Server containers.
 
 ## Building Windows Containers with ACR Build
 As a best practice, we recommend using  a version specific tag so you're assured you're building the image based on the version of Windows you intend to deploy.
@@ -67,7 +67,7 @@ The following commands are provided to test and iterate with various approaches.
 ## Acquiring Windows Support for the AZ CLI
 To use ACR Build for Windows, as of 7/12/18, use the docker instructions for running the CLI at: https://docs.microsoft.com/en-us/cli/azure/run-azure-cli-docker?view=azure-cli-latest
 
-However, use: `docker pull azurecr/azure-cli` as the Windows support hasn't yet been merged with the public **az cli**
+However, use: `docker run -v ${HOME}:/root -it azuresdk/azure-cli-python:dev` as the Windows support hasn't yet been merged with the public **az cli**
 
 
 ## Defaulting the registry name:
