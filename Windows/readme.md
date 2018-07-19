@@ -273,4 +273,3 @@ Then file a topic via:
 - [Feedback: http://aka.ms/acr/feedback](http://aka.ms/acr/feedback)
 - [Issues/Bugs: http://aka.ms/acr/issues](http://aka.ms/acr/issues)
 - [Requests: https://aka.ms/acr/uservoice](https://aka.ms/acr/uservoice)
-
