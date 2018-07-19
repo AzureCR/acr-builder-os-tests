@@ -23,6 +23,7 @@ namespace aspnetmvcapp.Controllers
                                                        Environment.GetEnvironmentVariable("HOSTNAME");
             ViewData["OSARCHITECTURE"] = RuntimeInformation.OSArchitecture;
             ViewData["OSDESCRIPTION"] = RuntimeInformation.OSDescription;
+            ViewData["OS-VERSION"] = Environment.GetEnvironmentVariable("OS-VERSION");
             ViewData["PROCESSARCHITECTURE"] = RuntimeInformation.ProcessArchitecture;
             ViewData["PROCESSOR_REVISION"] = Environment.GetEnvironmentVariable("PROCESSOR_REVISION");
             ViewData["FRAMEWORKDESCRIPTION"] = RuntimeInformation.FrameworkDescription;

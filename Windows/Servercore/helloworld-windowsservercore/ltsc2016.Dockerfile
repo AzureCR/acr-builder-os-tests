@@ -14,5 +14,6 @@ RUN msbuild /p:Configuration=Release
 
 
 FROM microsoft/aspnet:4.7.2-windowsservercore-ltsc2016 AS runtime
+ENV OS-VERSION=ltsc2016
 WORKDIR /inetpub/wwwroot
 COPY --from=build /app/helloworld-windowsservercore/. ./

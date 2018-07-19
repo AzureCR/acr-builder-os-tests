@@ -18,5 +18,6 @@ RUN dotnet publish helloworld-nanoserver.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
+ENV OS-VERSION=1709
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "helloworld-nanoserver.dll"]

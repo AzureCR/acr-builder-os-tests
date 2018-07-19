@@ -14,5 +14,6 @@ RUN msbuild /p:Configuration=Release
 
 
 FROM microsoft/aspnet:4.7.2-windowsservercore-1709 AS runtime
+ENV OS-VERSION=1709
 WORKDIR /inetpub/wwwroot
 COPY --from=build /app/helloworld-windowsservercore/. ./
