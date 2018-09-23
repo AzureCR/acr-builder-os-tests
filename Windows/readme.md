@@ -134,7 +134,7 @@ az acr task create \
     -n Helloworld-WinServercore-Ltsc2016 \
     -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} \
     -f helloworld-windowsservercore/ltsc2016.Dockerfile \
-    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore.git \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
     --os windows \
     --git-access-token $PAT
 ```
