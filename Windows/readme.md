@@ -58,7 +58,7 @@ db1a0a41a540        microsoft/aspnetcore           2.0-nanoserver-1709          
 # Building Windows images with ACR Build
 The following commands are provided to test and iterate with various approaches. These include `az acr build` for *quick builds*, meaning you can request a build that isn't based on a git commit. You can build from a local directory, or point **acr build** to an existing git repo. This is the equivalent of using `docker build`, except docker isn't required on the machine you're issuing `acr build` from.
 
-`acr build-task` represents a build definition that's awaiting changes. By default, **acr build** will trigger on git-commits and runtime base image updates. For more information, see https://aka.ms/acr/build
+`acr task` represents a build definition that's awaiting changes. By default, **acr build** will trigger on git-commits and runtime base image updates. For more information, see https://aka.ms/acr/build
 
 ## Acquiring Windows Support for the AZ CLI
 To use ACR Build for Windows, as of 7/12/18, use the docker instructions for running the CLI at: https://docs.microsoft.com/en-us/cli/azure/run-azure-cli-docker?view=azure-cli-latest
@@ -78,11 +78,11 @@ az configure --defaults acr=jengademos
 
 ## Getting a personal access token
 
-The default for build-task requires a git-access-token. This will configure a webhook on the repository to trigger your build-task when commits are made. 
+The default for task requires a git-access-token. This will configure a webhook on the repository to trigger your task when commits are made. 
 
-To use ACR Build with a repository you don't own, such as https://github.com/AzureCR/acr-builder-os-tests, you can pass the additional flag `--commit-trigger-enabled=false` which removes the dependency on a personal access token. As a result, the build-task will not automatically triggger on commits, but you can manually start the build task: `az acr build-task run -n HelloworldWinServercoreLtsc2016`
+To use ACR Build with a repository you don't own, such as https://github.com/AzureCR/acr-builder-os-tests, you can pass the additional flag `--commit-trigger-enabled=false` which removes the dependency on a personal access token. As a result, the task will not automatically triggger on commits, but you can manually start the build task: `az acr task run -n HelloworldWinServercoreLtsc2016`
 
-See: [create-a-build-task](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-tutorial-build-task#create-a-build-task) in docs for configuring a personal access token. 
+See: [create-a-task](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-tutorial-build-task#create-a-build-task) in docs for configuring a personal access token. 
 
 ```bash
 PAT=[token]
@@ -104,9 +104,9 @@ az acr build \
     --os windows \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 
-# acr build-task, triggered by git-commits and base image updates, such as windows server core
-az acr build-task create \
-    -n HelloworldWinServercoreMultiarch \
+# acr task, triggered by git-commits and base image updates, such as windows server core
+az acr task create \
+    -n Helloworld-WinServercore-Multiarch \
     -t helloworld-windowsservercore:multi-arch-{{.Build.ID}} \
     -f helloworld-windowsservercore/multi-arch.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
@@ -129,12 +129,12 @@ az acr build \
     --os windows \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 
-# acr build-task, triggered by git-commits and base image updates, such as windows server core
-az acr build-task create \
-    -n HelloworldWinServercoreLtsc2016 \
+# acr task, triggered by git-commits and base image updates, such as windows server core
+az acr task create \
+    -n Helloworld-WinServercore-Ltsc2016 \
     -t helloworld-windowsservercore:ltsc2016-{{.Build.ID}} \
     -f helloworld-windowsservercore/ltsc2016.Dockerfile \
-    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
+    -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore.git \
     --os windows \
     --git-access-token $PAT
 ```
@@ -154,9 +154,9 @@ az acr build \
     --os windows \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 
-# acr build-task, triggered by git-commits and base image updates, such as windows server core
-az acr build-task create \
-    -n HelloworldWinServercore1709 \
+# acr task, triggered by git-commits and base image updates, such as windows server core
+az acr task create \
+    -n Helloworld-WinServercore-1709 \
     -t helloworld-windowsservercore:1709-{{.Build.ID}} \
     -f helloworld-windowsservercore/1709.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
@@ -179,9 +179,9 @@ az acr build \
     --os windows \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore
 
-# acr build-task, triggered by git-commits and base image updates, such as windows server core
-az acr build-task create \
-    -n HelloworldWinServercore1803 \
+# acr task, triggered by git-commits and base image updates, such as windows server core
+az acr task create \
+    -n Helloworld-WinServercore-1803 \
     -t helloworld-windowsservercore:1803-{{.Build.ID}} \
     -f helloworld-windowsservercore/1803.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Servercore \
@@ -207,8 +207,8 @@ az acr build \
     --os windows \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
 
-az acr build-task create \
-    -n HelloworldNanoServerMultiarch \
+az acr task create \
+    -n Helloworld-NanoServer-Multiarch \
     -t helloworld-nanoserver:multi-arch-{{.Build.ID}} \
     -f helloworld-nanoserver/multi-arch.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
@@ -231,8 +231,8 @@ az acr build \
     --os windows \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
 
-az acr build-task create \
-    -n HelloworldNanoServer1709 \
+az acr task create \
+    -n Helloworld-NanoServer-1709 \
     -t helloworld-nanoserver:1709-{{.Build.ID}} \
     -f helloworld-nanoserver/1709.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
@@ -255,8 +255,8 @@ az acr build \
     --os windows \
     https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver 
 
-az acr build-task create \
-    -n HelloworldNanoServer1803 \
+az acr task create \
+    -n Helloworld-NanoServer-1803 \
     -t helloworld-nanoserver:1803-{{.Build.ID}} \
     -f helloworld-nanoserver/1803.Dockerfile \
     -c https://github.com/AzureCR/acr-builder-os-tests.git#master:Windows/Nanoserver \
